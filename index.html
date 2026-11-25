@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b16">
+<title>Lucky Casino</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#080b16;color:#fff;
+  font-family:Arial,sans-serif;
+  min-height:100vh;padding-bottom:100px;
+}
+.app{max-width:500px;margin:auto;padding:20px 17px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:27px}
+.logo{font-size:23px;font-weight:900;letter-spacing:1px}
+.logo span{color:#9b65ff}
+.profile{
+  width:43px;height:43px;border-radius:15px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#783cff,#00cfff);
+  font-size:20px;
+}
+.welcome{font-size:12px;color:#8d96b5;letter-spacing:2px}
+h1{font-size:25px;margin-top:7px}
+.balance-card{
+  margin-top:22px;padding:23px;
+  border-radius:22px;
+  background:radial-gradient(circle at 90% 10%,#753bff55,transparent 40%),
+  linear-gradient(135deg,#1b2040,#111629);
+  border:1px solid #7653c966;
+  box-shadow:0 10px 35px #713dff20;
+}
+.balance-title{font-size:12px;color:#a6acc9}
+.balance-number{font-size:35px;font-weight:900;margin:12px 0}
+.balance-number span{font-size:18px;color:#a878ff}
+.balance-note{font-size:11px;color:#828ba9}
+.actions{display:flex;gap:10px;margin-top:19px}
+.action{
+  flex:1;padding:12px;border:1px solid #7653c966;
+  border-radius:12px;background:#242044;color:white;
+  font-weight:bold;font-size:12px;
+}
+.banner{
+  margin-top:20px;padding:21px;
+  border-radius:20px;
+  background:linear-gradient(110deg,#41217f,#182d65 75%,#087d9c);
+  position:relative;overflow:hidden;
+}
+.banner:after{
+  content:"✦";position:absolute;right:20px;top:10px;
+  font-size:75px;color:#ffffff20;
+}
+.banner small{color:#d4c4ff}
+.banner h2{font-size:21px;margin:8px 0}
+.banner p{font-size:12px;color:#ddd8ff}
+.section{margin-top:29px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.section-head h2{font-size:19px}
+.section-head span{font-size:12px;color:#a77aff}
+.categories{display:flex;gap:10px;overflow-x:auto;padding-bottom:5px}
+.category{
+  white-space:nowrap;border:1px solid #292f4b;
+  background:#151a2d;color:#aab1cc;
+  padding:11px 15px;border-radius:13px;font-size:12px;
+}
+.category.active{background:#35205e;color:#d6bdff;border-color:#925bff}
+.games{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.game{
+  background:#141a2d;border:1px solid #29304b;
+  border-radius:18px;overflow:hidden;
+}
+.game-art{
+  height:105px;display:grid;place-items:center;
+  font-size:43px;
+  background:radial-gradient(circle,#6636b955,#171d36 70%);
+}
+.game-info{padding:13px}
+.game-info h3{font-size:14px}
+.game-info p{font-size:11px;color:#8992b1;margin-top:6px}
+.bonus{
+  display:flex;align-items:center;gap:15px;
+  padding:17px;background:#171b30;
+  border:1px solid #343052;border-radius:17px;
+}
+.bonus-icon{font-size:32px}
+.bonus-text{flex:1}
+.bonus-text b{font-size:13px}
+.bonus-text p{font-size:11px;color:#8992b1;margin-top:5px}
+.bonus button{
+  border:0;border-radius:10px;padding:10px 12px;
+  background:#743fff;color:white;font-weight:bold;
+}
+.bottom{
+  position:fixed;bottom:0;left:0;width:100%;
+  background:#101426;border-top:1px solid #292f49;
+  display:flex;justify-content:space-around;
+  padding:13px 5px 20px;z-index:5;
+}
+.nav{
+  border:0;background:none;color:#7e88a9;
+  font-size:10px;min-width:55px;
+}
+.nav span{display:block;font-size:21px;margin-bottom:5px}
+.nav.active{color:#b18aff}
+.toast{
+  position:fixed;bottom:90px;left:50%;
+  transform:translateX(-50%);
+  background:#292044;border:1px solid #895bff;
+  border-radius:12px;padding:12px 17px;
+  font-size:12px;display:none;z-index:10;
+}
+</style>
+</head>
+
+<body>
+<main class="app">
+
+<header class="header">
+  <div class="logo">LUCKY <span>CASINO</span></div>
+  <div class="profile">👤</div>
+</header>
+
+<div class="welcome">ТВОЯ ИГРОВАЯ ВСЕЛЕННАЯ</div>
+<h1 id="greeting">Привет, игрок! 👋</h1>
+
+<section class="balance-card">
+  <div class="balance-title">ТВОЙ БАЛАНС</div>
+  <div class="balance-number">1 000 <span>🪙</span></div>
+  <div class="balance-note">Виртуальные монеты · Демонстрационный баланс</div>
+  <div class="actions">
+    <button class="action" onclick="notify('История скоро появится')">📋 История</button>
+    <button class="action" onclick="notify('Бонусы скоро появятся')">🎁 Бонусы</button>
+  </div>
+</section>
+
+<section class="banner">
+  <small>WELCOME TO LUCKY CASINO</small>
+  <h2>Твоя игра. Твои правила.</h2>
+  <p>Открывай мини-игры и собирай достижения!</p>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Категории</h2>
+    <span>Все игры →</span>
+  </div>
+  <div class="categories">
+    <button class="category active" onclick="notify('Все игры')">🔥 Все</button>
+    <button class="category" onclick="notify('Аркады скоро появятся')">🎮 Аркады</button>
+    <button class="category" onclick="notify('Удача скоро появится')">✨ Удача</button>
+    <button class="category" onclick="notify('Новинки скоро появятся')">🆕 Новинки</button>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <h2>Популярные игры</h2>
+    <span>Смотреть все</span>
+  </div>
+  <div class="games">
+    <div class="game" onclick="notify('Lucky Slots скоро появится')">
+      <div class="game-art">🎰</div>
+      <div class="game-info">
+        <h3>Lucky Slots</h3>
+        <p>Виртуальные игровые автоматы</p>
+      </div>
+    </div>
+    <div class="game" onclick="notify('Dice скоро появится')">
+      <div class="game-art">🎲</div>
+      <div class="game-info">
+        <h3>Dice Arena</h3>
+        <p>Игры с кубиками</p>
+      </div>
+    </div>
+    <div class="game" onclick="notify('Coin Flip скоро появится')">
+      <div class="game-art">🪙</div>
+      <div class="game-info">
+        <h3>Coin Flip</h3>
+        <p>Орёл или решка</p>
+      </div>
+    </div>
+    <div class="game" onclick="notify('Memory Game скоро появится')">
+      <div class="game-art">🧩</div>
+      <div class="game-info">
+        <h3>Memory Game</h3>
+        <p>Проверь свою память</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head"><h2>Ежедневная награда</h2></div>
+  <div class="bonus">
+    <div class="bonus-icon">🎁</div>
+    <div class="bonus-text">
+      <b>Бонус за вход</b>
+      <p>Заходи каждый день и получай награды</p>
+    </div>
+    <button onclick="notify('Скоро добавим ежедневные награды')">Скоро</button>
+  </div>
+</section>
+
+</main>
+
+<nav class="bottom">
+  <button class="nav active" onclick="navigate(this,'Главная')"><span>🏠</span>Главная</button>
+  <button class="nav" onclick="navigate(this,'Игры')"><span>🎮</span>Игры</button>
+  <button class="nav" onclick="navigate(this,'Рейтинг')"><span>🏆</span>Рейтинг</button>
+  <button class="nav" onclick="navigate(this,'Профиль')"><span>👤</span>Профиль</button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const tg = window.Telegram?.WebApp;
+
+if(tg){
+  tg.ready();
+  tg.expand();
+  const user = tg.initDataUnsafe?.user;
+  if(user?.first_name){
+    document.getElementById("greeting").textContent =
+      "Привет, " + user.first_name + "! 👋";
+  }
+}
+
+function notify(message){
+  const el=document.getElementById("toast");
+  el.textContent=message;
+  el.style.display="block";
+  setTimeout(()=>el.style.display="none",2200);
+}
+
+function navigate(button,section){
+  document.querySelectorAll(".nav").forEach(x=>x.classList.remove("active"));
+  button.classList.add("active");
+  if(section!=="Главная") notify(section+" скоро появится");
+}
+</script>
+</body>
+</html>
