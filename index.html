@@ -4,16 +4,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#090D19">
+<meta name="theme-color" content="#000000">
 <title>LuckyShot</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <style>
 :root {
-    --bg: #090D19;
-    --panel: #111A2D;
-    --panel2: #17233B;
+    --bg: #000000;
+    --panel: #101522;
+    --panel2: #171F32;
     --blue: #559BFF;
     --purple: #8568FF;
     --text: #F5F7FF;
@@ -29,15 +29,14 @@
 }
 
 body {
-    background: var(--bg);
+    background: #000;
     color: var(--text);
-    font-family: Inter, -apple-system, BlinkMacSystemFont,
-                 "Segoe UI", sans-serif;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     min-height: 100vh;
-    padding-bottom: 100px;
+    padding-bottom: calc(42px + env(safe-area-inset-bottom));
 }
 
-button {
+button, select {
     font: inherit;
     border: none;
     cursor: pointer;
@@ -47,14 +46,14 @@ button {
 /* HEADER */
 
 .header {
-    height: 76px;
-    padding: 0 16px;
+    min-height: 65px;
+    padding: 0 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 7px;
     border-bottom: 1px solid var(--border);
-    background: rgba(9,13,25,.96);
+    background: #000;
     position: sticky;
     top: 0;
     z-index: 10;
@@ -63,18 +62,18 @@ button {
 .brand {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 6px;
     min-width: 0;
 }
 
 .logo {
-    width: 35px;
-    height: 35px;
+    width: 31px;
+    height: 31px;
     flex-shrink: 0;
 }
 
 .brand-name {
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 900;
     letter-spacing: -1px;
     white-space: nowrap;
@@ -87,61 +86,76 @@ button {
 .header-right {
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 7px;
 }
+
+/* WALLET */
 
 .wallet {
     display: flex;
     align-items: center;
-    gap: 7px;
-    background: var(--panel);
+    gap: 6px;
+    background: #101522;
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 7px 8px 7px 10px;
+    border-radius: 9px;
+    padding: 5px 6px 5px 8px;
 }
 
 .wallet-info {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 1px;
+    min-width: 43px;
 }
 
-.wallet-label {
-    font-size: 9px;
-    color: var(--muted);
-    letter-spacing: .7px;
+.currency-select {
+    width: 53px;
+    background: transparent;
+    color: #8CB9FF;
+    font-size: 10px;
+    font-weight: 850;
+    outline: none;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.currency-select option {
+    background: #111827;
+    color: white;
 }
 
 .wallet-value {
-    font-size: 14px;
-    font-weight: 800;
+    font-size: 12px;
+    font-weight: 850;
     white-space: nowrap;
+    font-variant-numeric: tabular-nums;
 }
 
 .add-button {
     background: linear-gradient(135deg, #478FFF, #745AFF);
-    border-radius: 8px;
-    padding: 8px 9px;
-    font-size: 11px;
+    border-radius: 6px;
+    padding: 7px 7px;
+    font-size: 9px;
     font-weight: 800;
     white-space: nowrap;
 }
 
 .profile-button {
-    width: 36px;
-    height: 36px;
+    width: 31px;
+    height: 31px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--panel2);
+    background: #151B2A;
     border: 1px solid var(--border);
     flex-shrink: 0;
 }
 
 .profile-button svg {
-    width: 19px;
-    height: 19px;
+    width: 17px;
+    height: 17px;
 }
 
 /* MAIN */
@@ -149,7 +163,7 @@ button {
 .main {
     max-width: 650px;
     margin: 0 auto;
-    padding: 20px 16px;
+    padding: 20px 15px;
 }
 
 .welcome {
@@ -157,7 +171,7 @@ button {
 }
 
 .welcome-label {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--blue);
     font-weight: 800;
     letter-spacing: 1.5px;
@@ -165,17 +179,17 @@ button {
 }
 
 .welcome h1 {
-    font-size: 25px;
+    font-size: 24px;
     line-height: 1.2;
     font-weight: 850;
     letter-spacing: -.7px;
 }
 
 .welcome p {
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.6;
     color: var(--muted);
-    margin-top: 9px;
+    margin-top: 8px;
 }
 
 /* FEATURE */
@@ -183,12 +197,11 @@ button {
 .feature {
     position: relative;
     overflow: hidden;
-    min-height: 205px;
-    border-radius: 20px;
-    padding: 20px;
+    min-height: 195px;
+    border-radius: 17px;
+    padding: 19px;
     background:
-        radial-gradient(ellipse at 90% 40%,
-        rgba(111,83,255,.30), transparent 55%),
+        radial-gradient(ellipse at 90% 40%, rgba(111,83,255,.25), transparent 55%),
         linear-gradient(120deg, #152849, #11172D 65%, #201642);
     border: 1px solid rgba(110,145,255,.2);
     margin-bottom: 25px;
@@ -197,8 +210,8 @@ button {
 .feature::after {
     content: "";
     position: absolute;
-    width: 190px;
-    height: 190px;
+    width: 180px;
+    height: 180px;
     right: -75px;
     top: 10px;
     border-radius: 50%;
@@ -213,34 +226,33 @@ button {
 
 .feature-tag {
     display: inline-block;
-    padding: 6px 9px;
+    padding: 5px 8px;
     border-radius: 6px;
     background: rgba(80,145,255,.15);
     color: #8CB9FF;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 800;
     letter-spacing: 1px;
 }
 
 .feature h2 {
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 900;
-    margin-top: 16px;
-    letter-spacing: -.5px;
+    margin-top: 15px;
 }
 
 .feature p {
     color: #A6B5D1;
-    font-size: 12px;
+    font-size: 11px;
     margin-top: 7px;
 }
 
 .feature-button {
-    margin-top: 19px;
+    margin-top: 17px;
     background: linear-gradient(110deg, #478FFF, #785BFF);
-    padding: 11px 18px;
-    border-radius: 10px;
-    font-size: 12px;
+    padding: 10px 16px;
+    border-radius: 9px;
+    font-size: 11px;
     font-weight: 800;
 }
 
@@ -250,16 +262,16 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 13px;
+    margin-bottom: 12px;
 }
 
 .section-title h3 {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 800;
 }
 
 .section-title span {
-    font-size: 11px;
+    font-size: 10px;
     color: var(--muted);
 }
 
@@ -268,40 +280,39 @@ button {
 .game-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    gap: 11px;
 }
 
 .game-card {
     min-width: 0;
     background: var(--panel);
     border: 1px solid var(--border);
-    border-radius: 15px;
+    border-radius: 13px;
     overflow: hidden;
 }
 
 .game-art {
-    height: 112px;
+    height: 105px;
     display: flex;
     align-items: center;
     justify-content: center;
     background:
-        radial-gradient(circle at center,
-        rgba(93,117,255,.22), transparent 65%),
-        #17223A;
+        radial-gradient(circle at center, rgba(93,117,255,.22), transparent 65%),
+        #111827;
 }
 
 .game-art svg {
-    width: 55px;
-    height: 55px;
+    width: 51px;
+    height: 51px;
     color: #86A9FF;
 }
 
 .game-info {
-    padding: 11px;
+    padding: 10px;
 }
 
 .game-info h4 {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
 }
 
@@ -311,21 +322,34 @@ button {
     margin-top: 5px;
 }
 
-/* BOTTOM NAVIGATION */
+/* EXCHANGE RATE CREDIT */
+
+.rate-credit {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 9px;
+    color: #59647A;
+}
+
+.rate-credit a {
+    color: #829AC3;
+    text-decoration: none;
+}
+
+/* BOTTOM NAV */
 
 .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 76px;
-    padding: 8px 18px calc(8px + env(safe-area-inset-bottom));
-    background: rgba(13,19,33,.97);
+    height: calc(39px + env(safe-area-inset-bottom));
+    padding: 2px 18px env(safe-area-inset-bottom);
+    background: rgba(8,11,19,.98);
     border-top: 1px solid var(--border);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     z-index: 20;
-    backdrop-filter: blur(18px);
 }
 
 .nav-item {
@@ -333,29 +357,25 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 1px;
     background: transparent;
     color: #77849E;
-    font-size: 10px;
+    font-size: 8px;
     font-weight: 650;
 }
 
 .nav-item svg {
-    width: 21px;
-    height: 21px;
+    width: 15px;
+    height: 15px;
 }
 
 .nav-item.active {
     color: #83AFFF;
 }
 
-.nav-item.active svg {
-    filter: drop-shadow(0 0 7px rgba(80,145,255,.5));
-}
-
 .nav-item.center svg {
-    width: 25px;
-    height: 25px;
+    width: 17px;
+    height: 17px;
 }
 
 button:active {
@@ -366,8 +386,8 @@ button:active {
 
 @media (max-width: 360px) {
     .header {
-        padding: 0 10px;
-        gap: 5px;
+        padding: 0 8px;
+        gap: 4px;
     }
 
     .brand-name {
@@ -375,31 +395,35 @@ button:active {
     }
 
     .logo {
-        width: 30px;
-        height: 30px;
+        width: 27px;
+        height: 27px;
     }
 
     .header-right {
-        gap: 6px;
-    }
-
-    .wallet {
-        padding: 6px;
         gap: 5px;
     }
 
+    .wallet {
+        padding: 4px 5px;
+        gap: 4px;
+    }
+
+    .currency-select {
+        width: 45px;
+    }
+
     .wallet-value {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .add-button {
-        font-size: 10px;
-        padding: 7px;
+        font-size: 8px;
+        padding: 6px 5px;
     }
 
     .profile-button {
-        width: 32px;
-        height: 32px;
+        width: 29px;
+        height: 29px;
     }
 }
 </style>
@@ -410,7 +434,6 @@ button:active {
 <header class="header">
 
     <div class="brand">
-        <!-- Фирменный барабан LuckyShot -->
         <svg class="logo" viewBox="0 0 100 100" fill="none">
             <defs>
                 <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
@@ -419,8 +442,8 @@ button:active {
                 </linearGradient>
             </defs>
             <circle cx="50" cy="50" r="43" stroke="url(#metal)" stroke-width="7"/>
-            <circle cx="50" cy="50" r="31" fill="#192943" stroke="#80A9FF" stroke-width="3"/>
-            <g fill="#0A1020" stroke="#83AFFF" stroke-width="2">
+            <circle cx="50" cy="50" r="31" fill="#101827" stroke="#80A9FF" stroke-width="3"/>
+            <g fill="#000000" stroke="#83AFFF" stroke-width="2">
                 <circle cx="50" cy="31" r="8"/>
                 <circle cx="66" cy="41" r="8"/>
                 <circle cx="60" cy="60" r="8"/>
@@ -437,9 +460,19 @@ button:active {
 
         <div class="wallet">
             <div class="wallet-info">
-                <span class="wallet-label">БАЛАНС</span>
-                <span class="wallet-value">1 000 🪙</span>
+                <select class="currency-select" id="currency" aria-label="Выбрать валюту">
+                    <option value="RUB">RUB ▾</option>
+                    <option value="USD">USD ▾</option>
+                    <option value="EUR">EUR ▾</option>
+                    <option value="GBP">GBP ▾</option>
+                    <option value="AED">AED ▾</option>
+                    <option value="TRY">TRY ▾</option>
+                    <option value="KZT">KZT ▾</option>
+                    <option value="CNY">CNY ▾</option>
+                </select>
+                <span class="wallet-value" id="walletValue">1 000</span>
             </div>
+
             <button class="add-button" onclick="showMessage('Пополнение скоро появится')">
                 + Пополнить
             </button>
@@ -486,8 +519,7 @@ button:active {
 
             <article class="game-card">
                 <div class="game-art">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="1.3">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
                         <circle cx="12" cy="12" r="9"/>
                         <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/>
                     </svg>
@@ -500,8 +532,7 @@ button:active {
 
             <article class="game-card">
                 <div class="game-art">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         stroke-width="1.5">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <rect x="4" y="4" width="16" height="16" rx="4"/>
                         <circle cx="9" cy="9" r="1.2" fill="currentColor"/>
                         <circle cx="15" cy="15" r="1.2" fill="currentColor"/>
@@ -518,6 +549,13 @@ button:active {
         </div>
     </section>
 
+    <div class="rate-credit">
+        Курсы валют предоставлены
+        <a href="https://www.exchangerate-api.com/" target="_blank" rel="noopener">
+            ExchangeRate-API
+        </a>
+    </div>
+
 </main>
 
 <nav class="bottom-nav">
@@ -531,8 +569,7 @@ button:active {
     </button>
 
     <button class="nav-item center" onclick="setTab(this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="1.7">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
             <circle cx="12" cy="12" r="9"/>
             <circle cx="12" cy="12" r="3"/>
             <path d="M12 3v6m9 3h-6M12 21v-6M3 12h6"/>
@@ -558,6 +595,20 @@ if (tg) {
     tg.expand();
 }
 
+// Пока используем демонстрационный баланс.
+// В дальнейшем получим его из защищённого сервера.
+const baseBalanceRUB = 1000;
+
+const currencySelect = document.getElementById("currency");
+const walletValue = document.getElementById("walletValue");
+
+let exchangeRates = null;
+let ratesDate = null;
+
+const formatter = new Intl.NumberFormat("ru-RU", {
+    maximumFractionDigits: 2
+});
+
 function showMessage(message) {
     if (tg) {
         tg.showAlert(message);
@@ -567,20 +618,71 @@ function showMessage(message) {
 }
 
 function setTab(button) {
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
+    document.querySelectorAll(".nav-item").forEach(item => {
+        item.classList.remove("active");
     });
 
-    button.classList.add('active');
+    button.classList.add("active");
 
     const tab = button.innerText.trim();
 
-    if (tab !== 'Лобби') {
-        showMessage(tab + ' — этот раздел пока в разработке');
+    if (tab !== "Лобби") {
+        showMessage(tab + " — этот раздел пока в разработке");
     }
 }
+
+function updateBalance() {
+    const currency = currencySelect.value;
+
+    if (currency === "RUB") {
+        walletValue.textContent = formatter.format(baseBalanceRUB);
+        return;
+    }
+
+    if (!exchangeRates || !exchangeRates[currency]) {
+        walletValue.textContent = "Нет курса";
+        return;
+    }
+
+    const converted = baseBalanceRUB * exchangeRates[currency];
+
+    walletValue.textContent = formatter.format(converted);
+}
+
+async function loadExchangeRates() {
+    try {
+        const response = await fetch(
+            "https://open.er-api.com/v6/latest/RUB"
+        );
+
+        if (!response.ok) {
+            throw new Error("Не удалось получить курсы валют");
+        }
+
+        const data = await response.json();
+
+        if (data.result !== "success" || !data.rates) {
+            throw new Error("Некорректный ответ сервиса");
+        }
+
+        exchangeRates = data.rates;
+        ratesDate = data.time_last_update_utc || null;
+
+        updateBalance();
+
+    } catch (error) {
+        console.error("Ошибка курсов валют:", error);
+        walletValue.textContent =
+            currencySelect.value === "RUB"
+                ? formatter.format(baseBalanceRUB)
+                : "Нет курса";
+    }
+}
+
+currencySelect.addEventListener("change", updateBalance);
+
+loadExchangeRates();
 </script>
 
 </body>
 </html>
-
